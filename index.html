@@ -13,6 +13,82 @@
         <title>Page Redirection</title>
     </head>
     <body>
+	    <!-- Splash screen starts -->
+<style media="screen">.waitOverlay {
+      position: fixed;
+      top: 0;
+      z-index: 1060;
+      width: 100%;
+      height: 100%;
+      font-weight: bold;
+      font-family: 'Arial', 'HelveticaNeue-Bold';
+      font-size: 30px;
+      background: #FFF;
+      table-layout: fixed;
+    }</style>
+
+<table id="waitOverlay" class="waitOverlay"> <tbody><tr> <td style="vertical-align:middle"> <div style="width:400px;max-width:100%;margin:auto;padding:30px"> <span id="quotesLine1">It always seems impossible until it’s done.</span><br><br> <span id="quotesLine2">Be Hopeful.</span><br> <span>Be <span style="color:#fdd835">Edude.Me.</span></span> </div>   </td></tr></tbody></table>
+
+<script type="text/javascript">//Hide splash screen when open via webview
+      if (location.search.match(/device/)) {
+        document.getElementById('waitOverlay')
+          .style.display = "none";
+      }
+
+      var quotesLine1 = ['Thought everything was possible as a kid?',
+        'Don’t let the world take away your innocence.',
+        'Don’t let your knowledge limit you.',
+        'There is nothing more kickass than being who you are.',
+        'It always seems impossible until it’s done.',
+        'One day it will all make sense.',
+        'Nobody else is walking your journey.',
+        'Create a life that feels good on the inside.'
+      ];
+
+      var quotesLine2 = ['Believe again.',
+        'Be Pure.',
+        'Be Imaginative.',
+        'Be Raw.',
+        'Be Hopeful.',
+        'Follow your heart.',
+        'Trust your instincts.',
+        'Be Honest.',
+      ];
+
+      var random = 0;
+
+      var setRandomQuotes = function() {
+        random = Math.floor(Math.random() * 8);
+        document.getElementById('quotesLine1')
+          .innerHTML = quotesLine1[random];
+        document.getElementById('quotesLine2')
+          .innerHTML = quotesLine2[random];
+      }
+
+      setRandomQuotes();
+
+      var shuffleQuotes = setInterval(function() {
+        setRandomQuotes();
+      }, 4500);
+
+      window.addEventListener("load", function(event) {
+        console.info('from load');
+        clearInterval(shuffleQuotes);
+        document.getElementById('waitOverlay').style.display = "none";
+        window.removeEventListener("DOMContentLoaded", function() {});
+      });
+      window.addEventListener('DOMContentLoaded', function() {
+        console.info('from DOMContentLoaded');
+        // clearInterval(shuffleQuotes);
+        // var showSplash = setTimeout(function() {
+        //   document.getElementById('waitOverlay').style.display = "none";
+        // }, 5000);
+        // window.removeEventListener("DOMContentLoaded", function() {});
+      });</script>
+
+<!-- Splash screen ends-->
+<!---->
+	    
         <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
         If you are not redirected automatically, follow the <a href='http://fb.com/ZappKart'>link to ZappKart</a>
     </body>
